@@ -1,12 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone</title>
+    <title>Fatma Fauziah | Portfolio</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Welcome to My Portfolio</h1>
-    <p>Flask berhasil berjalan 🎉</p>
+
+<nav>
+    <h2>Fatma.</h2>
+
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Projects</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+
+    <div class="hero-text">
+
+        <h3>Hello, I'm</h3>
+
+        <h1>Fatma Fauziah</h1>
+
+        <h2>Informatics Engineering Student</h2>
+
+        <p>
+            Passionate about Web Development,
+            UI Design, and creating beautiful digital experiences.
+        </p>
+
+        <a href="#" class="btn">Explore Portfolio</a>
+
+    </div>
+
+   <div class="hero-image">
+    <img src="{{ url_for('static', filename='uploads/fatma.png') }}" alt="Fatma Fauziah">
+</div>
+
+</section>
+
+<section class="about" id="about">
+
+    <div class="about-title">
+        <h2>About Me</h2>
+        <p>A little introduction about myself.</p>
+    </div>
+
+    <div class="about-content">
+
+        <div class="about-card">
+
+            <h3>Who Am I?</h3>
+
+            <p>
+                Hello! I'm <strong>Fatma Fauziah</strong>, an Informatics Engineering student who enjoys creating beautiful and functional websites. I love learning new technologies, solving problems through programming, and designing user-friendly interfaces.
+            </p>
+
+            <p>
+                My goal is to continuously improve my skills and build digital solutions that are useful, modern, and impactful.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
 </body>
-</html>
+</html>         
