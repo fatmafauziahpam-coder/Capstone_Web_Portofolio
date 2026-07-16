@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if project %}Edit{% else %}Tambah{% endif %} Project</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        body{
+            background:#f8f5f7;
+            font-family:Arial, sans-serif;
+        }
+
+        .container{
+            width:600px;
+            margin:50px auto;
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 10px 20px rgba(0,0,0,.1);
+        }
+
+        h2{
+            color:#7b2946;
+        }
+
+        input, textarea{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:8px;
+            font-size:15px;
+        }
+
+        textarea{
+            height:120px;
+            resize:none;
+        }
+
+        button{
+            background:#7b2946;
+            color:white;
+            padding:12px 25px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        a{
+            margin-left:15px;
+            text-decoration:none;
+            color:#7b2946;
+            font-weight:bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>
+{% if project %}
+Edit Project
+{% else %}
+Tambah Project
+{% endif %}
+</h2>
+
+<form method="POST">
+
+<input
+type="text"
+name="title"
+placeholder="Judul Project"
+value="{{ project.title if project else '' }}"
+required>
+
+<textarea
+name="description"
+placeholder="Deskripsi"
+required>{{ project.description if project else '' }}</textarea>
+
+<input
+type="text"
+name="github"
+placeholder="Link Github"
+value="{{ project.github if project else '' }}">
+
+<input
+type="text"
+name="demo"
+placeholder="Demo Website"
+value="{{ project.demo if project else '' }}">
+
+<input
+type="text"
+name="image"
+placeholder="Nama File Gambar"
+value="{{ project.image if project else '' }}">
+
+<br><br>
+
+<button type="submit">
+{% if project %}
+Update Project
+{% else %}
+Simpan Project
+{% endif %}
+</button>
+
+<a href="{{ url_for('dashboard') }}">
+Kembali
+</a>
+
+</form>
+
+</div>
+
+</body>
+</html>

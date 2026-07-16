@@ -662,3 +662,94 @@ footer hr{
     opacity:1;
     transform:translateY(0);
 }
+/* ================= LOGIN ================= */
+
+.login-section{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:#fdf6f8;
+
+}
+
+.login-box{
+
+width:350px;
+
+background:white;
+
+padding:40px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+
+text-align:center;
+
+}
+
+.login-box h2{
+
+color:#8a2146;
+
+margin-bottom:10px;
+
+}
+
+.login-box p{
+
+margin-bottom:30px;
+
+color:#777;
+
+}
+
+.login-box input{
+
+width:100%;
+
+padding:14px;
+
+margin-bottom:18px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+font-size:15px;
+
+}
+
+.login-box button{
+
+width:100%;
+
+padding:14px;
+
+background:#8a2146;
+
+color:white;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+font-size:16px;
+
+transition:.3s;
+
+}
+
+.login-box button:hover{
+
+background:#b43d69;
+
+}
