@@ -1,3 +1,7 @@
+html{
+    scroll-behavior:smooth;
+}
+
 *{
     margin:0;
     padding:0;
@@ -19,9 +23,11 @@ nav{
     justify-content:space-between;
     align-items:center;
     background:#7A2E45;
+
     position:sticky;
     top:0;
     z-index:1000;
+
 }
 
 nav h2{
@@ -29,6 +35,13 @@ nav h2{
     font-family:"Playfair Display",serif;
     font-size:26px;
     letter-spacing:2px;
+    transition:.3s;
+cursor:pointer;
+}
+
+nav h2:hover{
+    color:#F8D7E2;
+
 }
 
 nav ul{
@@ -480,4 +493,147 @@ body::after{
 
 .contact-card a:hover{
     color:#355C4A;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#7A2E45;
+    padding:60px 10%;
+    text-align:center;
+}
+
+footer h2{
+    font-family:"Playfair Display", serif;
+    color:white;
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+footer p{
+    color:#F7DCE5;
+    font-size:17px;
+}
+
+.footer-links{
+    margin:35px 0;
+    display:flex;
+    justify-content:center;
+    gap:35px;
+}
+
+.footer-links a{
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:.3s;
+}
+
+.footer-links a:hover{
+    color:#F8D7E2;
+}
+
+footer hr{
+    border:none;
+    border-top:1px solid rgba(255,255,255,.2);
+    margin:35px auto;
+    width:70%;
+}
+
+.copyright{
+    color:#E9C7D3;
+    font-size:15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:992px){
+
+    nav{
+        padding:18px 8%;
+    }
+
+    .hero{
+        flex-direction:column-reverse;
+        text-align:center;
+        padding:80px 8%;
+    }
+
+    .hero-text{
+        width:100%;
+        margin-top:50px;
+    }
+
+    .hero-image{
+        width:100%;
+    }
+
+    .hero-text h1{
+        font-size:54px;
+    }
+
+    .about-container,
+    .project-container,
+    .skills-container,
+    .contact-container{
+        flex-direction:column;
+        gap:30px;
+    }
+
+    .about-card,
+    .project-card,
+    .skill-card,
+    .contact-card{
+        width:100%;
+    }
+
+    footer{
+        padding:50px 8%;
+    }
+
+}
+
+@media (max-width:576px){
+
+    nav{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav ul{
+        gap:20px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    nav h2{
+        font-size:24px;
+    }
+
+    .hero-text h1{
+        font-size:46px;
+    }
+
+    .hero-text h2{
+        font-size:24px;
+    }
+
+    .hero-image img{
+        width:260px;
+        height:260px;
+    }
+
+    .section-title h2{
+        font-size:38px;
+    }
+
+    footer h2{
+        font-size:30px;
+    }
+
+    .footer-links{
+        flex-direction:column;
+        gap:15px;
+    }
+
 }
