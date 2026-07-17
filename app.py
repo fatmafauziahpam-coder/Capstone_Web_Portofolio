@@ -209,8 +209,12 @@ def contact():
 
     return redirect(url_for("home"))
 
-with app.app_context():
-    db.create_all()
+try:
+    with app.app_context():
+        db.create_all()
+except Exception as e:
+    print("DATABASE ERROR:", e)
+    raise
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
