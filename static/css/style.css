@@ -753,3 +753,74 @@ transition:.3s;
 background:#b43d69;
 
 }
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-form{
+    width: 80%;
+    max-width: 700px;
+    margin: 60px auto;
+}
+
+.contact-form h2{
+    color:#7b2946;
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.contact-form form{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+
+    width:100%;
+    padding:15px;
+
+    border:2px solid #d8b4c3;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-family:'Poppins',sans-serif;
+}
+
+.contact-form textarea{
+    min-height:180px;
+    resize:vertical;
+}
+
+.contact-form button{
+
+    width:220px;
+
+    margin:auto;
+
+    background:#7b2946;
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:30px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.contact-form button:hover{
+
+    background:#5f1f36;
+
+}

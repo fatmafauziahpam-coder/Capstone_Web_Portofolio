@@ -31,21 +31,22 @@
 
         <h3>Hello, I'm</h3>
 
-        <h1>Fatma Fauziah</h1>
+        <h1>{{ profile.fullname if profile else "Fatma Fauziah" }}</h1>
 
-        <h2>Informatics Engineering Student</h2>
+<h2>{{ profile.profession if profile else "Informatics Engineering Student" }}</h2>
 
-        <p>
-            Passionate about Web Development,
-            UI Design, and creating beautiful digital experiences.
-        </p>
+<p>
+    Passionate about Web Development,
+    UI Design, and creating beautiful digital experiences.
+</p>
 
         <a href="#" class="btn">Explore Portfolio</a>
 
     </div>
 
    <div class="hero-image">
-    <img src="{{ url_for('static', filename='uploads/fatma.png') }}" alt="Fatma Fauziah">
+    <img src="{{ url_for('static', filename='uploads/' + (profile.photo if profile and profile.photo else 'fatma.png')) }}"
+     alt="Foto Profil">
 </div>
 
 </section>
@@ -64,8 +65,10 @@
             <h3>Who Am I?</h3>
 
             <p>
-                Hello! I'm <strong>Fatma Fauziah</strong>, an Informatics Engineering student who enjoys creating beautiful and functional websites. I love learning new technologies, solving problems through programming, and designing user-friendly interfaces.
-            </p>
+
+{{ profile.about if profile else "Belum ada deskripsi." }}
+
+</p>
 
             <p>
                 My goal is to continuously improve my skills and build digital solutions that are useful, modern, and impactful.
@@ -100,7 +103,6 @@
     </div>
 
 </section>
-
 <section class="projects" id="projects">
 
     <div class="section-title">
@@ -110,57 +112,26 @@
 
     <div class="projects-grid">
 
-        <div class="project-card">
-
-        <img src="{{ url_for('static', filename='uploads/portofolio.project.png') }}" alt="Personal Portfolio">
-
-            <h3>Personal Portfolio</h3>
-
-            <p>
-                A responsive personal portfolio website built using HTML, CSS, and Flask.
-            </p>
-
-            <a href="https://github.com/fatmafauziahpam-coder/Capstone_Web_Portofolio"
-   target="_blank"
-   class="project-btn">
-   GitHub
-</a>
-
-        </div>
+        {% for project in projects %}
 
         <div class="project-card">
 
-            <img src="{{ url_for('static', filename='uploads/kalkulator.project.png') }}" alt="Web Calculator">
+            <img src="{{ url_for('static', filename='uploads/' + project.image) }}"
+                 alt="{{ project.title }}">
 
-            <h3>Web Calculator</h3>
+            <h3>{{ project.title }}</h3>
 
-            <p>
-                A calculator web application created with Python Flask, HTML, CSS, and JavaScript.
-            </p>
+            <p>{{ project.description }}</p>
 
-            <a href="https://github.com/fatmafauziahpam-coder/kalkulator-flask"
-   target="_blank"
-   class="project-btn">
-   GitHub
-</a>
-
-        </div>
-
-        <div class="project-card">
-
-            <div class="project-image">
-                🚀
-            </div>
-
-            <h3>Future Projects</h3>
-
-            <p>
-                More exciting projects will be added soon as I continue learning and building.
-            </p>
-
-            <a href="#" class="project-btn">Future Projects</a>
+            <a href="{{ project.github }}"
+               target="_blank"
+               class="project-btn">
+                GitHub
+            </a>
 
         </div>
+
+        {% endfor %}
 
     </div>
 
@@ -228,18 +199,22 @@
             <div class="contact-icon">📧</div>
             <h3>Email</h3>
 
-            <a href="mailto:fatmafauziahpam@gmail.com">
-                fatmafauziahpam@gmail.com
-                </a>
+            <a href="mailto:{{ profile.email if profile else '' }}">
+    {{ profile.email if profile else '-' }}
+            </a>
         </div>
 
         <div class="contact-card">
             <div class="contact-icon">📱</div>
             <h3>WhatsApp</h3>
 
-            <a href="https://wa.me/089508434178" target="_blank">
-                chat via whatsApp
+            <a href="https://wa.me/{{ profile.phone if profile else '' }}"
+            target="_blank">
+
+             chat via WhatsApp
+
             </a>
+        
         </div>
 
         <div class="contact-card">
@@ -267,7 +242,45 @@
 </div>
 
     </div>
+<hr style="margin:60px 0;">
 
+<div class="contact-form">
+
+    <h2>Send Me a Message</h2>
+
+    <form action="{{ url_for('contact') }}" method="POST">
+
+        <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required>
+
+        <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required>
+
+        <textarea
+            name="message"
+            placeholder="Write your message..."
+            rows="6"
+            required></textarea>
+
+        <button type="submit">
+            Send Message
+        </button>
+
+    </form>
+
+</div>
 </section>
 
 <footer class="hidden">

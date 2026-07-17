@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pesan Masuk</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+body{
+background:#f8f5f7;
+font-family:Arial;
+}
+
+.container{
+width:90%;
+margin:40px auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+}
+
+th,td{
+padding:12px;
+border:1px solid #ddd;
+}
+
+th{
+background:#7b2946;
+color:white;
+}
+
+a{
+text-decoration:none;
+background:#7b2946;
+color:white;
+padding:10px 20px;
+border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Pesan Masuk</h1>
+
+<br>
+
+<a href="{{ url_for('dashboard') }}">
+Kembali
+</a>
+
+<br><br>
+
+<table>
+
+<tr>
+
+<th>No</th>
+
+<th>Nama</th>
+
+<th>Email</th>
+
+<th>Subject</th>
+
+<th>Pesan</th>
+
+<th>Tanggal</th>
+
+</tr>
+
+{% for contact in contacts %}
+
+<tr>
+
+<td>{{ loop.index }}</td>
+
+<td>{{ contact.name }}</td>
+
+<td>{{ contact.email }}</td>
+
+<td>{{ contact.subject }}</td>
+
+<td>{{ contact.message }}</td>
+
+<td>{{ contact.created_at.strftime('%d-%m-%Y %H:%M') }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

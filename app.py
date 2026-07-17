@@ -134,6 +134,51 @@ def delete_project(id):
     flash("Project berhasil dihapus!")
 
     return redirect(url_for("dashboard"))
+
+# ======================
+# EDIT PROFILE
+# ======================
+@app.route("/profile/edit", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+
+    profile = Profile.query.first()
+
+    if profile is None:
+        profile = Profile()
+        db.session.add(profile)
+        db.session.commit()
+
+    if request.method == "POST":
+
+        profile.fullname = request.form["fullname"]
+        profile.profession = request.form["profession"]
+        profile.about = request.form["about"]
+        profile.email = request.form["email"]
+        profile.phone = request.form["phone"]
+        profile.photo = request.form["photo"]
+
+        db.session.commit()
+
+        flash("Profile berhasil diperbarui!")
+
+        return redirect(url_for("dashboard"))
+
+    return render_template("profile_form.html", profile=profile)
+# ======================
+# MESSAGES
+# ======================
+@app.route("/messages")
+@login_required
+def messages():
+
+    contacts = Contact.query.order_by(Contact.created_at.desc()).all()
+
+    return render_template(
+        "messages.html",
+        contacts=contacts
+    )
+
 # ======================
 # LOGOUT
 # ======================
@@ -144,7 +189,25 @@ def logout():
     logout_user()
 
     return redirect(url_for("login"))
+# ======================
+# CONTACT
+# ======================
+@app.route("/contact", methods=["POST"])
+def contact():
 
+    data = Contact(
+        name=request.form["name"],
+        email=request.form["email"],
+        subject=request.form["subject"],
+        message=request.form["message"]
+    )
+
+    db.session.add(data)
+    db.session.commit()
+
+    flash("Pesan berhasil dikirim!")
+
+    return redirect(url_for("home"))
 
 if __name__ == "__main__":
 
