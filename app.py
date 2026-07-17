@@ -23,15 +23,21 @@ def load_user(user_id):
 # ======================
 @app.route("/")
 def home():
+    try:
+        profile = Profile.query.first()
+        projects = Project.query.all()
 
-    profile = Profile.query.first()
-    projects = Project.query.all()
+        return render_template(
+            "index.html",
+            profile=profile,
+            projects=projects
+        )
 
-    return render_template(
-        "index.html",
-        profile=profile,
-        projects=projects
-    )
+    except Exception as e:
+        return f"""
+        <h2>ERROR</h2>
+        <pre>{type(e).__name__}: {e}</pre>
+        """, 500
 
 
 # ======================
