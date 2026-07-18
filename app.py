@@ -215,12 +215,8 @@ def contact():
 
     return redirect(url_for("home"))
 
-try:
+if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-except Exception as e:
-    print("DATABASE ERROR:", e)
-    raise
 
-if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
