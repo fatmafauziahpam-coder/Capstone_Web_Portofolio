@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+import os
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from config import Config
 from models import db, User, Profile, Project, Contact
@@ -11,6 +13,20 @@ db.init_app(app)
 login_manager = LoginManager()
 login_manager.login_view = "login"
 login_manager.init_app(app)
+ALLOWED_EXTENSIONS = {
+    "png",
+    "jpg",
+    "jpeg",
+    "gif",
+    "webp"
+}
+
+
+def allowed_file(filename):
+    return (
+        "." in filename
+        and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+    )
 
 
 @login_manager.user_loader
@@ -38,7 +54,18 @@ def home():
         <h2>ERROR</h2>
         <pre>{type(e).__name__}: {e}</pre>
         """, 500
+@app.route("/project/<int:id>")
+def project_detail(id):
 
+    project = Project.query.get_or_404(id)
+
+    profile = Profile.query.first()
+
+    return render_template(
+        "project_detail.html",
+        project=project,
+        profile=profile
+    )
 
 # ======================
 # LOGIN
@@ -73,9 +100,15 @@ def dashboard():
 
     projects = Project.query.all()
 
+    total_project = Project.query.count()
+
+    total_message = Contact.query.count()
+
     return render_template(
         "dashboard.html",
-        projects=projects
+        projects=projects,
+        total_project=total_project,
+        total_message=total_message
     )
 @app.route("/project/add", methods=["GET", "POST"])
 @login_required
@@ -83,12 +116,33 @@ def add_project():
 
     if request.method == "POST":
 
+        filename = ""
+
+        file = request.files.get("image")
+
+        if file and file.filename != "":
+
+            if not allowed_file(file.filename):
+
+                flash("Format gambar tidak didukung!")
+
+                return redirect(request.url)
+
+            filename = secure_filename(file.filename)
+
+            file.save(
+                os.path.join(
+                    app.config["UPLOAD_FOLDER"],
+                    filename
+                )
+            )
+
         project = Project(
             title=request.form["title"],
             description=request.form["description"],
             github=request.form["github"],
             demo=request.form["demo"],
-            image=request.form["image"]
+            image=filename
         )
 
         db.session.add(project)
@@ -114,7 +168,25 @@ def edit_project(id):
         project.description = request.form["description"]
         project.github = request.form["github"]
         project.demo = request.form["demo"]
-        project.image = request.form["image"]
+
+        file = request.files.get("image")
+
+        if file and file.filename != "":
+
+            if not allowed_file(file.filename):
+                flash("Format gambar tidak didukung!")
+                return redirect(request.url)
+
+            filename = secure_filename(file.filename)
+
+            file.save(
+                os.path.join(
+                    app.config["UPLOAD_FOLDER"],
+                    filename
+                )
+            )
+
+            project.image = filename
 
         db.session.commit()
 
@@ -122,7 +194,10 @@ def edit_project(id):
 
         return redirect(url_for("dashboard"))
 
-    return render_template("project_form.html", project=project)
+    return render_template(
+        "project_form.html",
+        project=project
+    )
 
 
 # ======================

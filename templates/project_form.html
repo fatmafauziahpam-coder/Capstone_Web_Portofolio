@@ -74,7 +74,7 @@ Tambah Project
 {% endif %}
 </h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
 <input
 type="text"
@@ -100,11 +100,16 @@ name="demo"
 placeholder="Demo Website"
 value="{{ project.demo if project else '' }}">
 
+<label>Upload Gambar Project</label>
+
 <input
-type="text"
+type="file"
 name="image"
-placeholder="Nama File Gambar"
-value="{{ project.image if project else '' }}">
+accept=".png,.jpg,.jpeg,.gif,.webp">
+
+{% if project and project.image %}
+<p>Gambar saat ini : {{ project.image }}</p>
+{% endif %}
 
 <br><br>
 

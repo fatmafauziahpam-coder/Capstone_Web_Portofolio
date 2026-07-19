@@ -123,11 +123,17 @@
 
             <p>{{ project.description }}</p>
 
-            <a href="{{ project.github }}"
-               target="_blank"
-               class="project-btn">
-                GitHub
-            </a>
+            <a href="{{ url_for('project_detail', id=project.id) }}"
+   class="project-btn">
+    Lihat Detail
+</a>
+
+<a href="{{ project.github }}"
+   target="_blank"
+   class="project-btn"
+   style="margin-top:10px;">
+    GitHub
+</a>
 
         </div>
 

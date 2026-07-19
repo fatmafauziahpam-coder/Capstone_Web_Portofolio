@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<title>{{ project.title }}</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+body{
+    background:#FFF7FA;
+    font-family:Poppins,sans-serif;
+}
+
+.container{
+    width:85%;
+    margin:50px auto;
+}
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card img{
+    width:100%;
+    max-width:700px;
+    display:block;
+    margin:auto;
+    border-radius:15px;
+}
+
+h1{
+    color:#7b2946;
+    margin-top:30px;
+}
+
+p{
+    line-height:1.8;
+    font-size:18px;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:12px 28px;
+    background:#7b2946;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<img src="{{ url_for('static',
+filename='uploads/' + project.image) }}">
+
+<h1>{{ project.title }}</h1>
+
+<p>{{ project.description }}</p>
+
+<a class="btn"
+href="{{ project.github }}"
+target="_blank">
+GitHub
+</a>
+
+<a class="btn"
+href="{{ url_for('home') }}">
+Kembali
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
