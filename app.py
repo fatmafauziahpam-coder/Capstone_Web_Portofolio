@@ -116,33 +116,14 @@ def add_project():
 
     if request.method == "POST":
 
-        filename = ""
-
-        file = request.files.get("image")
-
-        if file and file.filename != "":
-
-            if not allowed_file(file.filename):
-
-                flash("Format gambar tidak didukung!")
-
-                return redirect(request.url)
-
-            filename = secure_filename(file.filename)
-
-            file.save(
-                os.path.join(
-                    app.config["UPLOAD_FOLDER"],
-                    filename
-                )
-            )
+        
 
         project = Project(
             title=request.form["title"],
             description=request.form["description"],
             github=request.form["github"],
             demo=request.form["demo"],
-            image=filename
+            image=request.form["image"]
         )
 
         db.session.add(project)

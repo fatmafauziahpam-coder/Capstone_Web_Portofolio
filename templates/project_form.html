@@ -102,14 +102,18 @@ value="{{ project.demo if project else '' }}">
 
 <label>Upload Gambar Project</label>
 
-<input
-type="file"
-name="image"
-accept=".png,.jpg,.jpeg,.gif,.webp">
+<label>Nama File Gambar</label>
 
-{% if project and project.image %}
-<p>Gambar saat ini : {{ project.image }}</p>
-{% endif %}
+<input
+type="text"
+name="image"
+placeholder="Contoh: fortopolio.png"
+value="{{ project.image if project else '' }}"
+required>
+
+<small>
+Masukkan nama file yang ada di folder <b>static/uploads</b>
+</small>
 
 <br><br>
 
